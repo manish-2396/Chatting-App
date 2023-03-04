@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMassage, getMassage } from "../Redux/AppReducer/action";
+import { v4 as uuidv4 } from "uuid";
 
 const Massage = ({ CurretChat, socket }) => {
   const dispatch = useDispatch();
@@ -11,8 +12,14 @@ const Massage = ({ CurretChat, socket }) => {
   const [currentUser, setCurrentUser] = useState("");
   const [currentChat, setCurrentChat] = useState("");
   const [arr, setArr] = useState({});
+  const [massage, setMassage] = useState([]);
   const scrollRef = useRef();
-  console.log(socket)
+
+  useEffect(() => {
+    if (dataMassage && dataMassage.length > 0) {
+      setMassage(dataMassage);
+    }
+  }, [dataMassage]);
 
   useEffect(() => {
     setCurrentUser(CurretChat?.currentUserId);
@@ -20,19 +27,15 @@ const Massage = ({ CurretChat, socket }) => {
   }, [CurretChat]);
 
   useEffect(() => {
-    dispatch(
-      getMassage({
-        from: currentUser,
-        to: currentChat,
-      })
-    );
+    const payload = {
+      from: currentUser,
+      to: currentChat,
+    };
+
+    dispatch(getMassage(payload));
   }, [currentChat]);
 
-  // console.log(dataMassage);
-
   const hanleMoves = (e) => {
-    console.log(e.key);
-
     if (e.key === "Enter" && currentChat) {
       const payload = {
         Massage: masg,
@@ -42,19 +45,36 @@ const Massage = ({ CurretChat, socket }) => {
 
       setmasg("");
       dispatch(addMassage(payload));
+      socket.current.emit("send-msg", payload);
     }
   };
-
-  // console.log(socket.current);
 
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-receieve", (msg) => {
         console.log("msg", msg);
-        setArr({});
+        let { Massage, from, to } = msg;
+        setArr({
+          Message: {
+            text: Massage,
+          },
+          users: [from, to],
+          sender: from,
+          _id: uuidv4(),
+        });
       });
     }
   }, [socket.current]);
+
+  useEffect(() => {
+    console.log(arr.sender);
+    if (arr.sender) {
+      console.log(arr);
+      let temp = [...massage , arr]
+      console.log(temp);
+      setMassage(temp);
+    }
+  }, [arr]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({
@@ -78,25 +98,23 @@ const Massage = ({ CurretChat, socket }) => {
           style={{ overflowY: "scroll", border: "solid" }}
           ref={scrollRef}
         >
-          {dataMassage &&
-            dataMassage.length > 0 &&
-            dataMassage.map((e) => {
-              return (
-                <Box
-                  key={e._id}
-                  border="1px solid black"
-                  m="5px"
-                  p="5px"
-                  fontSize="1.4rem"
-                  borderRadius="10px"
-                  className={`${
-                    currentUser === e.users[0] ? "recieved" : "sender"
-                  }`}
-                >
-                  {e.Message.text}
-                </Box>
-              );
-            })}
+          {massage.map((e) => {
+            return (
+              <Box
+                key={e._id}
+                border="1px solid black"
+                m="5px"
+                p="5px"
+                fontSize="1.4rem"
+                borderRadius="10px"
+                className={`${
+                  currentUser === e.users[0] ? "recieved" : "sender"
+                }`}
+              >
+                {e.Message.text}
+              </Box>
+            );
+          })}
           {dataMassage && dataMassage.length == 0 && (
             <Box display="flex" justifyContent="center">
               {" "}

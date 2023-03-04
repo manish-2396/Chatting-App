@@ -23,7 +23,6 @@ const Contact = ({ currentUser, setCurrentChat }) => {
     localStorage.clear()
   };
 
-  console.log(allUser)
 
   return (
     <Box>

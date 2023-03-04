@@ -29,7 +29,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("manish", form);
+
     dispatch(signup(form));
   };
   return (

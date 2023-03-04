@@ -27,7 +27,7 @@ ChatController.post("/getChat", async (req, res) => {
       users: { $all: [from, to] },
     }).sort({ updatedAt: 1 });
 
-    console.log
+
 
     res.status(200).send({ Massage: "Ok", data: data });
   } catch (err) {}

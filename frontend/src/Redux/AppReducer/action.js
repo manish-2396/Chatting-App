@@ -1,6 +1,7 @@
 import * as Types from "./actionType";
 
 export const getMassage = (payload) => (dispatch) => {
+
   dispatch({ type: Types.GET_MASSAGE_REQUEST });
   fetch(`http://localhost:8000/chat/getChat`, {
     method: "POST",
@@ -25,7 +26,7 @@ export const addMassage = (payload) => (dispatch) => {
     .then((res) => {
       const payload1 = {
         from: payload.from,
-        to: payload.from,
+        to: payload.to,
       };
 
       dispatch(getMassage(payload1));

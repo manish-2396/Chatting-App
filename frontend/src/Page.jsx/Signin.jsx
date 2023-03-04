@@ -32,8 +32,11 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("manish", form);
+    
+
     dispatch(signin(form))
+
+    return navigate("/signin")
   };
 
   return (
