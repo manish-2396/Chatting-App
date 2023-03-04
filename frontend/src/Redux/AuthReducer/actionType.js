@@ -1,0 +1,4 @@
+export const SIGNIN_REQUEST = "SIGNIN_REQUEST";
+export const SIGNIN_SUCCES = "SIGNIN_SUCCES";
+export const SIGNIN_FAILUER = "SIGNIN_FAILUER";
+
