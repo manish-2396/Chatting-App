@@ -42,6 +42,7 @@ const Signin = () => {
   return (
     <Box display="flex" justifyContent="center" alignItems="center" pt="20%">
       <Box width="20%" bgcolor="#fff" p="2rem" borderRadius="10px">
+      <Box textAlign="center" fontSize="2rem">Sign in</Box>
         <form action="" onSubmit={handleSubmit}>
           <Box>
             <TextField
@@ -65,6 +66,7 @@ const Signin = () => {
             <Button variant="outlined" type="submit">Submit</Button>
           </Box>
         </form>
+        <br/>
         <span onClick={() => navigate("/signup")}>don't have account</span>
       </Box>
     </Box>

@@ -3,7 +3,8 @@ const cors = require("cors");
 const { connect } = require("./DataBase/db");
 const { UserController } = require("./Controller/UserController");
 const { ChatController } = require("./Controller/ChatControll");
-const socket = require("socket.io")
+const socket = require("socket.io");
+const { middleware } = require("./Middleware/middleware");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8080;
@@ -16,6 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", UserController);
+
+app.use(middleware)
+
 app.use("/chat", ChatController);
 
 const server = app.listen(PORT, async () => {

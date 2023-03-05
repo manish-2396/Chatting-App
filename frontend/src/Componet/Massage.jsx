@@ -103,13 +103,13 @@ const Massage = ({ CurretChat, socket }) => {
           height="70vh"
           style={{ overflowY: "scroll" }}
           ref={scrollRef}
+          p="1rem"
         >
           {massage.map((e) => {
             return (
               <Box
                 key={e._id}
-                
-                m="5px"
+                m="10px"
                 p="5px"
                 fontSize="1.4rem"
                 borderRadius="10px"
@@ -133,7 +133,7 @@ const Massage = ({ CurretChat, socket }) => {
           )}
         </Box>
       }
-      <Box height="10vh" >
+      <Box height="10vh" fontSize="1rem">
         <TextField
           fullWidth
           type="text"

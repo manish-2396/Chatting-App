@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { UserModel } = require("../Model/UserModel");
 const bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 

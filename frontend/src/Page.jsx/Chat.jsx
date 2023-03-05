@@ -11,7 +11,7 @@ const Chat = () => {
   const [CurretChat, setCurrentChat] = useState([]);
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.authreducer);
-
+  
   useEffect(() => {
     if (currentUser._id) {
       dispatch(getContact(currentUser._id));

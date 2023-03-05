@@ -1,4 +1,8 @@
+import { getData } from "../../util/localStore";
 import * as Types from "./actionType";
+
+
+let token = getData("Auth")?.token
 
 export const getMassage = (payload) => (dispatch) => {
 
@@ -7,6 +11,7 @@ export const getMassage = (payload) => (dispatch) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      "authorization": token
     },
     body: JSON.stringify(payload),
   })
@@ -19,6 +24,7 @@ export const addMassage = (payload) => (dispatch) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      "authorization": token
     },
     body: JSON.stringify(payload),
   })
