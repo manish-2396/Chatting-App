@@ -4,19 +4,47 @@
   box-sizing: border-box;
 }
 
-.App{
-  background-color: red;
+.App {
+  background-image: url("https://media.istockphoto.com/id/1371726643/photo/different-notifications-on-violet-background-pop-up-messages-copy-space.jpg?b=1&s=170667a&w=0&k=20&c=FhmBYUrsGsR0hYn5zEDa0SkEFfF-rwuUfMEZ4HpX0rE=");
+  /* background-color: red; */
   height: 100vh;
 }
 
-.sender{
+.sender {
   text-align: left;
   background-color: aquamarine;
 }
 
 .recieved {
   text-align: right;
-background-color: rgb(183, 183, 221);
+  background-color: rgb(183, 183, 221);
+}
+
+@media only screen and (min-width: 64em) {
+  .box {
+    width: 70rem;
+  }
+
+  .box1 {
+    width: 15rem;
+  }
+
+  .box2 {
+    width: 55rem;
+  }
 }
 
 
+@media only screen and (max-width: 40em) {
+  .box {
+    width: 40em;
+  }
+
+  .box1 {
+    width: 10em;
+  }
+
+  .box2 {
+    width: 30em;
+  }
+}

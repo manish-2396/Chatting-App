@@ -19,17 +19,16 @@ const Contact = ({ currentUser, setCurrentChat }) => {
   };
 
   const handleSignOut = () => {
-    dispatch(signout())
-    localStorage.clear()
+    dispatch(signout());
+    localStorage.clear();
   };
-
 
   return (
     <Box>
       <Box fontSize="3rem" pl="2rem">
         Contact
       </Box>
-      <Box height="68vh">
+      <Box height="60vh">
         {allUser.length > 0 &&
           allUser.map((e) => {
             return (
@@ -58,7 +57,6 @@ const Contact = ({ currentUser, setCurrentChat }) => {
             );
           })}
       </Box>
-
       <Box>
         <Box fontSize="2rem" pl="2rem">
           {currentUser.username}

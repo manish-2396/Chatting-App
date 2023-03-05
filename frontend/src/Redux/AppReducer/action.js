@@ -22,13 +22,4 @@ export const addMassage = (payload) => (dispatch) => {
     },
     body: JSON.stringify(payload),
   })
-    .then((res) => res.json())
-    .then((res) => {
-      const payload1 = {
-        from: payload.from,
-        to: payload.to,
-      };
-
-      dispatch(getMassage(payload1));
-    });
 };

@@ -29,8 +29,8 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(signup(form));
+    return navigate("/signin")
   };
   return (
     <Box display="flex" justifyContent="center" alignItems="center" pt="20%">

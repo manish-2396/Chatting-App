@@ -42,17 +42,26 @@ const Massage = ({ CurretChat, socket }) => {
         from: currentUser,
         to: currentChat,
       };
-
       setmasg("");
       dispatch(addMassage(payload));
       socket.current.emit("send-msg", payload);
+      const msg = [...massage];
+      msg.push({
+        Message: {
+          text: masg,
+        },
+        users: [currentUser, currentChat],
+        sender: currentUser,
+        _id: uuidv4(),
+      });
+
+      setMassage(msg);
     }
   };
 
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-receieve", (msg) => {
-        console.log("msg", msg);
         let { Massage, from, to } = msg;
         setArr({
           Message: {
@@ -67,11 +76,8 @@ const Massage = ({ CurretChat, socket }) => {
   }, [socket.current]);
 
   useEffect(() => {
-    console.log(arr.sender);
     if (arr.sender) {
-      console.log(arr);
-      let temp = [...massage , arr]
-      console.log(temp);
+      let temp = [...massage, arr];
       setMassage(temp);
     }
   }, [arr]);
@@ -83,8 +89,8 @@ const Massage = ({ CurretChat, socket }) => {
   }, [dataMassage]);
 
   return (
-    <Box>
-      <Box height="10vh">
+    <Box borderLeft="3px solid teal">
+      <Box height="auto">
         {currentUser && (
           <Box fontSize="3rem" pl="2rem">
             {CurretChat?.username}
@@ -95,14 +101,14 @@ const Massage = ({ CurretChat, socket }) => {
       {
         <Box
           height="70vh"
-          style={{ overflowY: "scroll", border: "solid" }}
+          style={{ overflowY: "scroll" }}
           ref={scrollRef}
         >
           {massage.map((e) => {
             return (
               <Box
                 key={e._id}
-                border="1px solid black"
+                
                 m="5px"
                 p="5px"
                 fontSize="1.4rem"
@@ -127,7 +133,7 @@ const Massage = ({ CurretChat, socket }) => {
           )}
         </Box>
       }
-      <Box height="10vh" border="1px solid green">
+      <Box height="10vh" >
         <TextField
           fullWidth
           type="text"
