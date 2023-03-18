@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 const Private = ({ children }) => {
   const data = useSelector((state) => state.authreducer);
   const navigate = useNavigate();
-  console.log(data);
+
 
   useEffect(() => {
     if (!data.isAuth) {

@@ -43,14 +43,19 @@ const io = new Server(HttpServer, {
 global.onlineUser = new Map();
 
 io.on("connection", (socket) => {
+  
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
+    console.log(userId)
     onlineUser.set(userId, socket.id);
   });
 
   socket.on("send-msg", (data) => {
     const sendUserSocket = onlineUser.get(data.to);
+    console.log(global)
+    console.log(data ,sendUserSocket)
     if (sendUserSocket) {
+      console.log(data)
       socket.to(sendUserSocket).emit("msg-receieve", data);
     }
   });
